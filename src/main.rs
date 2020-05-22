@@ -20,18 +20,12 @@ fn main() {
     let address = &args[3];
     match protocol {
         "tcp" => match role {
-            "server" => {
-                tcp_server::serve(address).unwrap_or_else(|error| error!("{:?}", error));
-            }
-            "client" => {
-                // TODO: Call TCP client
-            }
+            "server" => tcp_server::serve(address).unwrap_or_else(|error| error!("{:?}", error)),
+            "client" => tcp_client::connect(address).unwrap_or_else(|error| error!("{:?}", error)),
             _ => missing_role(),
         },
         "udp" => match role {
-            "server" => {
-                // TODO: Call TCP server
-            }
+            "server" => udp_server::serve(address).unwrap_or_else(|error| error!("{:?}", error)),
             "client" => {
                 // TODO: Call TCP client
             }
