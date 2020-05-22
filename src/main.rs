@@ -27,7 +27,7 @@ fn main() {
         "udp" => match role {
             "server" => udp_server::serve(address).unwrap_or_else(|error| error!("{:?}", error)),
             "client" => {
-                // TODO: Call TCP client
+                udp_client::communicate(address).unwrap_or_else(|error| error!("{:?}", error))
             }
             _ => missing_role(),
         },
